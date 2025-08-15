@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weatherly Settings</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚙️ Settings</h1>
+    </header>
+
+    <section class="settings-section card">
+      <label for="default-location">Default Location (City):</label>
+      <input type="text" id="default-location" placeholder="e.g. Johannesburg" />
+
+      <label for="temp-unit">Temperature Unit:</label>
+      <select id="temp-unit">
+        <option value="metric">Celsius (°C)</option>
+        <option value="imperial">Fahrenheit (°F)</option>
+      </select>
+
+      <label for="theme-select">Theme:</label>
+      <select id="theme-select">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <button id="save-btn">💾 Save Settings</button>
+      <p id="status-msg" style="margin-top:1rem;"></p>
+    </section>
+
+<footer>
+  &copy; 2025 Weatherly. All rights reserved. <br />
+  Weather app designed and developed by <strong>Unathi Monjane</strong>.
+</footer>
+  </div>
+
+  <script>
+    // Load settings from localStorage
+    window.onload = () => {
+      const savedLocation = localStorage.getItem("defaultLocation") || "";
+      const savedUnit = localStorage.getItem("tempUnit") || "metric";
+      const savedTheme = localStorage.getItem("theme") || "light";
+
+      document.getElementById("default-location").value = savedLocation;
+      document.getElementById("temp-unit").value = savedUnit;
+      document.getElementById("theme-select").value = savedTheme;
+    };
+
+    // Save settings to localStorage
+    document.getElementById("save-btn").addEventListener("click", () => {
+      const location = document.getElementById("default-location").value.trim();
+      const unit = document.getElementById("temp-unit").value;
+      const theme = document.getElementById("theme-select").value;
+
+      localStorage.setItem("defaultLocation", location);
+      localStorage.setItem("tempUnit", unit);
+      localStorage.setItem("theme", theme);
+
+      // Show status
+      const status = document.getElementById("status-msg");
+      status.textContent = "Settings saved! Reload Weatherly to apply.";
+      setTimeout(() => status.textContent = "", 3000);
+    });
+  </script>
+
+</body>
+</html>
